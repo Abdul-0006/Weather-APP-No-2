@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple, clear weather dashboard" />
+    <title>Weather Today</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="weather-app" id="weatherApp">
+      <header class="search-header" id="searchHeader">
+        <div class="brand" id="brandName">Weather today</div>
+        <form class="search-form" id="searchForm">
+          <input
+            class="city-search"
+            id="citySearch"
+            type="search"
+            placeholder="Search a city..."
+            autocomplete="off"
+          />
+          <button class="search-button" id="searchButton" type="submit">
+            Search
+          </button>
+        </form>
+      </header>
+
+      <section class="weather-card" id="weatherCard" aria-labelledby="cityName">
+        <div class="card-top-row" id="cardTopRow">
+          <div class="location" id="locationDetails">
+            <p class="eyebrow" id="weatherLabel">Current weather</p>
+            <h1 class="city-name" id="cityName">London</h1>
+            <p class="weather-date" id="weatherDate">Today, 14 September</p>
+          </div>
+          <img
+            class="weather-image"
+            id="weatherImage"
+            src=""
+            alt="Weather condition illustration placeholder"
+          />
+        </div>
+
+        <div class="temperature-section" id="temperatureSection">
+          <div class="temperature-reading" id="temperatureReading">
+            <span class="temperature-value" id="temperatureValue">18</span>
+            <span class="temperature-unit" id="temperatureUnit">°C</span>
+          </div>
+          <p class="weather-status" id="weatherStatus">Partly cloudy</p>
+          <p class="feels-like" id="feelsLike">
+            Feels like <strong id="feelsLikeValue">17°C</strong>
+          </p>
+        </div>
+
+        <div class="weather-details" id="weatherDetails">
+          <div class="weather-detail" id="windDetail">
+            <span class="detail-label">Wind speed</span>
+            <strong class="detail-value" id="windSpeed">12 m/s</strong>
+          </div>
+          <div class="weather-detail" id="humidityDetail">
+            <span class="detail-label">Humidity</span>
+            <strong class="detail-value" id="humidity">64%</strong>
+          </div>
+        </div>
+
+        <div class="temperature-toggle" id="temperatureToggle">
+          <span class="toggle-label" id="temperatureToggleLabel"
+            >Temperature unit</span
+          >
+          <label class="toggle-control" for="fahrenheitToggle">
+            <span class="toggle-option">°C</span>
+            <input
+              id="fahrenheitToggle"
+              type="checkbox"
+              role="switch"
+              aria-label="Convert temperature to Fahrenheit"
+            />
+            <span class="toggle-slider"></span>
+            <span class="toggle-option">°F</span>
+          </label>
+        </div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap");
+
+:root {
+  --page-background: #eaf4f4;
+  --page-accent: #c9e7e6;
+  --card-background: #ffffff;
+  --heading-color: #173b4a;
+  --body-color: #5c7580;
+  --muted-color: #8aa0a7;
+  --highlight-color: #f6b66b;
+  --highlight-dark: #df8e3d;
+  --line-color: #e5eeee;
+  --shadow: 0 24px 60px rgba(27, 73, 83, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--body-color);
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--page-background) 0%,
+    #f8fbf9 54%,
+    var(--page-accent) 100%
+  );
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.weather-app {
+  width: min(100% - 40px, 1080px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 34px 0 56px;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.brand {
+  color: var(--heading-color);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.search-form {
+  display: flex;
+  width: min(100%, 360px);
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.72);
+  /* border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(27, 73, 83, 0.06); */
+}
+
+.city-search {
+  min-width: 0;
+  flex: 1;
+  padding: 10px 13px;
+  color: var(--heading-color);
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.city-search::placeholder {
+  color: var(--muted-color);
+}
+
+.search-button {
+  padding: 10px 17px;
+  color: #fff;
+  font-weight: 700;
+  background: var(--heading-color);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.search-button:hover {
+  background: #24586a;
+  transform: translateY(-1px);
+}
+
+.weather-card {
+  position: relative;
+  width: min(100%, 680px);
+  margin: clamp(48px, 11vh, 120px) auto 0;
+  padding: clamp(28px, 5vw, 54px);
+  overflow: hidden;
+  background: var(--card-background);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.card-top-row,
+.temperature-section,
+.weather-details,
+.temperature-toggle {
+  position: relative;
+  z-index: 1;
+}
+
+.card-top-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: var(--highlight-dark);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.city-name {
+  margin: 0;
+  color: var(--heading-color);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.3rem);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+.weather-date {
+  margin: 10px 0 0;
+  color: var(--muted-color);
+  font-size: 0.92rem;
+}
+
+.weather-image {
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 180px;
+  height: 180px;
+  flex: 0 0 180px;
+  margin: -24px -14px 0 0;
+  object-fit: contain;
+}
+
+.temperature-section {
+  margin-top: 42px;
+}
+
+.temperature-reading {
+  display: flex;
+  align-items: flex-start;
+  color: var(--heading-color);
+}
+
+.temperature-value {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(5.3rem, 16vw, 8.8rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+}
+
+.temperature-unit {
+  margin: 9px 0 0 12px;
+  color: var(--highlight-dark);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.weather-status {
+  margin: 22px 0 0;
+  color: var(--heading-color);
+  font-size: 1.22rem;
+  font-weight: 700;
+}
+.feels-like {
+  margin: 5px 0 0;
+  color: var(--muted-color);
+  font-size: 0.94rem;
+}
+.feels-like strong {
+  color: var(--body-color);
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 42px;
+  padding-top: 25px;
+  border-top: 1px solid var(--line-color);
+}
+
+.weather-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail-label,
+.toggle-label {
+  color: var(--muted-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.detail-value {
+  color: var(--heading-color);
+  font-size: 1.04rem;
+}
+
+.temperature-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.toggle-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toggle-control input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #c8d8d9;
+  border-radius: 20px;
+  transition: background-color 180ms ease;
+}
+
+.toggle-slider::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  content: "";
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(23, 59, 74, 0.2);
+  transition: transform 180ms ease;
+}
+
+.toggle-control input:checked + .toggle-slider {
+  background: var(--highlight-color);
+}
+.toggle-control input:checked + .toggle-slider::after {
+  transform: translateX(20px);
+}
+
+.toggle-control input:focus-visible + .toggle-slider,
+.search-button:focus-visible,
+.city-search:focus-visible {
+  outline: 3px solid rgba(246, 182, 107, 0.45);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .weather-app {
+    width: min(100% - 28px, 480px);
+    padding-top: 22px;
+  }
+  .search-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 17px;
+  }
+  .search-form {
+    width: 100%;
+  }
+  .weather-card {
+    margin-top: 32px;
+    border-radius: 22px;
+  }
+  .card-top-row {
+    gap: 8px;
+  }
+  .weather-image {
+    width: 120px;
+    height: 120px;
+    flex-basis: 120px;
+    margin: -14px -12px 0 0;
+  }
+  .temperature-section {
+    margin-top: 34px;
+  }
+  .temperature-toggle {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 11px;
+  }
+}
+
+@media (max-width: 390px) {
+  .weather-details {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
