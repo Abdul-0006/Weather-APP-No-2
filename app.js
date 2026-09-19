@@ -43,6 +43,11 @@ let clearWeatherData = () => {
   celsiusFeelsLike = undefined;
 };
 tempUnitToggle.addEventListener("click", () => {
+  if (celsiusTemp === undefined || celsiusFeelsLike === undefined) {
+    tempUnitToggle.checked = false;
+    return;
+  }
+
   if (tempUnitToggle.checked) {
     temp.textContent = `${Math.round((celsiusTemp * 9) / 5 + 32)}`;
     tempUnit.textContent = " °F";
