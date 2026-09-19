@@ -19,36 +19,49 @@ let celsiusFeelsLike;
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
   let inputValue = userSearch.value.trim();
-
   if (inputValue) {
     getData(inputValue);
   } else {
-    weatherStatus.textContent = "Please enter a city.";
+    clearWeatherData();
+    weatherStatus.textContent = "Please enter a city";
   }
 });
 
-tempUnitToggle.addEventListener("change", () => {
-  if (celsiusTemp === undefined) return;
-
+let clearWeatherData = () => {
+  cityName.textContent = "";
+  weatherIcon.removeAttribute("src");
+  weatherIcon.removeAttribute("alt");
+  date.textContent = "Today, date Month";
+  temp.textContent = "";
+  tempUnit.textContent = "°C";
+  feelsLikeTemp.textContent = "";
+  weatherStatus.textContent = "Enter a  city";
+  humidity.textContent = "";
+  windSpeed.textContent = "";
+  tempUnitToggle.checked = false;
+  celsiusTemp = undefined;
+  celsiusFeelsLike = undefined;
+};
+tempUnitToggle.addEventListener("click", () => {
   if (tempUnitToggle.checked) {
-    temp.textContent = Math.round((celsiusTemp * 9) / 5 + 32);
-    feelsLikeTemp.textContent = `${Math.round((celsiusFeelsLike * 9) / 5 + 32)}°F`;
-    tempUnit.textContent = "°F";
+    temp.textContent = `${Math.round((celsiusTemp * 9) / 5 + 32)}`;
+    tempUnit.textContent = " °F";
+    feelsLikeTemp.textContent = `${Math.round((celsiusFeelsLike * 9) / 5 + 32)} °F`;
   } else {
-    temp.textContent = celsiusTemp;
-    feelsLikeTemp.textContent = `${celsiusFeelsLike}°C`;
+    temp.textContent = Math.round(celsiusTemp);
     tempUnit.textContent = "°C";
+    feelsLikeTemp.textContent = `${Math.round(celsiusFeelsLike)}°C`;
   }
 });
-
 const getData = async (city) => {
+  clearWeatherData();
+
   try {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     let response = await fetch(url);
-
-    if (!response.ok) throw new Error("City not found");
-
     let data = await response.json();
+    if (!response.ok) throw new Error("Could not find the city");
+
     const weatherDate = new Date(data.dt * 1000);
 
     cityName.textContent = data.name;
@@ -61,12 +74,13 @@ const getData = async (city) => {
     });
     celsiusTemp = data.main.temp;
     celsiusFeelsLike = data.main.feels_like;
-    temp.textContent = celsiusTemp;
-    feelsLikeTemp.textContent = `${celsiusFeelsLike}°C`;
+    temp.textContent = Math.round(celsiusTemp);
+    feelsLikeTemp.textContent = `${Math.round(celsiusFeelsLike)}°C`;
     weatherStatus.textContent = data.weather[0].description;
     windSpeed.textContent = `${data.wind.speed} m/s`;
     humidity.textContent = `${data.main.humidity}%`;
-  } catch (error) {
-    weatherStatus.textContent = "Could not find that city.";
+  } catch {
+    clearWeatherData();
+    weatherStatus.textContent = "Could not find that city, enter a valid city";
   }
 };
